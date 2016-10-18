@@ -1,0 +1,163 @@
+<div class="contentarea" id="rightColumn">
+    <div class="pageTitle">
+        <h1>Analyst Recommendations</h1>
+    </div>
+
+    <div class="mainWrapper createFolio">
+        <form class="col-md-12" name="folioStocksForm" role="form" novalidate>
+
+
+            <div class="form-inline">
+
+                <div class=" col-sm-5" style="margin-left: 20px; margin-right: 20px">
+
+                    <div class="form-group stocksWrapper form-inline">
+
+                        <label>Analyst</label>
+
+                        <div>
+                            <div>
+                                <input type="text" class="form-control" ng-model="analystquery" placeholder="Type an Analyst name here">
+                                <button type="submit" ng-click="addSelectedAnalyst()" class="btn btn-save"><i class="fa fa-plus"></i></button>
+                            </div>
+                            </br>
+                            <div class="form-group">
+                                <select ng-model="selectedAnalystId" ng-dblclick="addSelectedAnalyst()" size="10" ng-options="analyst.id as analyst.name for analyst in analysts | filter:analystquery">
+                                    <option value="">Select One</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-5" style=" margin-left:20px; margin-right:20px">
+
+                    <div class="form-group stocksWrapper form-inline">
+
+
+                        <label>Stocks</label>
+                        <div>
+                            <div>
+                                <input type="text" class="form-control" ng-model="query" placeholder="Type a Stock name here">
+                                <button type="submit" ng-click="addSelectedStock()" class="btn btn-save"><i class="fa fa-plus"></i></button>
+                            </div>
+                            </br>
+                            <div class="form-group">
+
+
+                                <select ng-model="selectedStockId" ng-dblclick="addSelectedStock()" size="10" ng-options="stock.stockId as stock.stockName + '(' + stock.exchangeName + ')' for stock in stocks | filter:query">
+                                    <option value="">Select One</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div id="selectedstocks" class="customDataTableWrapper col-md-4">
+                <label>Selected Stock</label>
+                <table id="createFolioTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th align="center">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="stock in analystSearch.stocksList">
+                            <td>{{stock.stockName}}</td>
+                            <td>
+                                <button ng-click="removeStock(stock)" class="btnTransparent btnRemove">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>-->
+
+
+
+            <div id="selectedanalyst" class="customDataTableWrapper col-md-8">
+                <label>Search Criteria Selected </label>
+                <table id="createFolioTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th align="center"> Stocks Selected</th>
+                            <th>Date Range</th>
+                            <th>Buy / Sell</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="analyst in analystSearch.analystList">
+                            <td>
+                                {{analyst.name}} <button ng-click="removeAnalyst(analyst)" class="btnTransparent btnRemove">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                            <td>
+                            <td>
+                                {{stock.stockName}} <button ng-click="removeStock(analyst)" class="btnTransparent btnRemove">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                            <td>
+                                {{DateRange.from}} To {{DateRange.to}}
+                            </td>
+                            <td>
+                                {{Recomdations.type}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+
+
+            <div>
+                <button type="submit" ng-click="searchAnalyst()" class="btn btn-save">Search</button>
+            </div>
+
+            <div id="selectedstocks" class="customDataTableWrapper col-md-12	">
+                <label>Recommendations</label>
+                <table id="createFolioTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Analyst Name</th>
+                            <th>Stock Name</th>
+                            <th>Date Recommended</th>
+                            <th>Target Price</th>
+                            <th>Link</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="recomm in analystRecommendations">
+                            <td>{{recomm.advisor.name}}</td>
+                            <td>{{recomm.stock.stockName}}</td>
+                            <td>{{recomm.dateRecommended | date:'yyyy-MM-dd'}}</td>
+                            <td>{{recomm.price}}</td>
+                            <td><a href="{{recomm.link}}" target="_blank">{{recomm.link}}</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <ul class="pagination">
+
+                    <li ng-repeat="i in getNumber(totalPages) track by $index"><span><a ng-click="getAllAnalystRecommendations($index)">{{$index+1}}</a></span></li>
+                </ul>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+

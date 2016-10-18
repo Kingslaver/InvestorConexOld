@@ -1,0 +1,159 @@
+<div id="landingPageWrapper">
+ <div class="sliderSection">
+ 	<div class="sliderMobileView">
+ 		<img src="images/slider_mobile.jpg"/>
+ 	</div>
+ <div id="myCarousel" class="carousel slide" data-interval="5000" data-ride="carousel"> 
+	<!-- Carousel items -->
+	<div class="carousel-inner">
+		<div class="active item">
+			<div class="sliderText">
+				<h1>Watching market is NOT necessary to invest anymore</h1>
+				<a href="#" class="btn btn-primary">Read more</a>
+			</div>
+			<div class="sliderOverlay"></div>
+			<img src="images/1_slider_1.jpg" />
+		</div>
+		<div class="item">
+			<div class="sliderText">
+				<h1>With virtual investment, earn money even if you don't have cash to invest</h1>
+				<a href="#" class="btn btn-primary">Read more</a>
+			</div>
+			<div class="sliderOverlay"></div>
+			<img src="images/2_slider_2.jpg" />
+		</div>
+		<div class="item">
+			<div class="sliderText">
+				<h1>Talk to successful investors, learn the techniques from gurus and earn money. Well It's  that simple</h1>
+				<a href="#" class="btn btn-primary">Read more</a>
+			</div>
+			<div class="sliderOverlay"></div>
+			<img src="images/3_slider_3.jpg" />
+		</div>
+		<div class="item">
+			<div class="sliderText">
+				<h1>Discuss current market movements with leaders, and decide on investment strategy.</h1>
+				<a href="#" class="btn btn-primary">Read more</a>
+			</div>
+			<div class="sliderOverlay"></div>
+			<img src="images/4_slider_4.jpg" />
+		</div>
+
+	</div>
+	<!-- Carousel nav -->
+	  <a class="carousel-control left">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+	</a>
+	<a class="carousel-control right">
+		<span class="glyphicon glyphicon-chevron-right"></span>
+	</a>
+</div>
+    </div>
+	
+	
+    <div class="topPerformingFoliosContainer landingPage">
+        <div class="col-md-12 topPerformingFolios">	
+		 	<!--<img src="content/images/icon_trendingFolios.jpg">-->
+			<h2>Top Performing Folios</h2>
+			<p>Based on Monthly Returns </p>
+            <div class="row">
+				<div class="myFolioListWrapper">
+					<div class="row buttonWrapper">
+						<div class="folioNav">
+						   <a class="folioNavLeft" ng-hide="(pageNumber===0)" ng-click="getTopFoliosForHomePage(pageNumber-1)"><i class="fa fa-arrow-left"></i></a>
+						   <a class="folioNavRight" ng-hide="(pageNumber+1)===totalPages" ng-click="getTopFoliosForHomePage(pageNumber+1)"><i class="fa fa-arrow-right"></i></a>
+						 </div>
+					   </div>
+					<ul class="myFolioList">
+						 <li  ng-repeat="folio in searchResultFolios">
+							<a ng-href="#/folios/{{folio.folioId}}"><div class="folioImageMask"><img width="200" height="100" ng-src={{folio.image}}></div></a>
+								<div class="folioDetails">
+									<h3 class="folioTitle">{{folio.name}}</h3>
+									<h1 class="folioPercentage">{{folio.returns}}%</h1>
+								</div>
+							  </a>							
+						 </li>						 
+					  </ul>
+				</div>
+            </div>
+
+        </div>
+        <div class="col-md-12 searchAdvisor">
+		 	<!--<img src="content/images/img_searchAdvisor.jpg" />-->
+		   	<h2>Search Advisor</h2>
+
+            <div class="row">              
+                 <div class="col-md-12">
+					<ul class="myFolioList">
+						<li ng-repeat="advisor in searchResultAdvisors">
+							<a ng-href="#/advisory/details/{{advisor.advisoryId}}">
+								<div class="folioImageMask"><img src="content/images/img_advisor1.jpg" class="img-responsive"/></div>
+		                        <div class="folioDetails">
+		                            <h3 class="folioTitle">{{advisor.name}}</h3>
+		                        </div>
+		                      </a>
+		                 </li>
+		          	</ul>
+            	</div>
+            </div>
+        </div>
+    </div>
+	
+	
+    <div class="highLights">
+		<div class="container">
+			<h2>Do you want to know the Smart Way of Investment?</h2>
+			<a class="btn btn-primary btn-blue">Read more</a>
+		</div>
+    </div>
+    <div class="videoContainer">
+		<div class="container">
+			<div class="col-md-4">
+				<h3>Video</h3>
+				<img src="content/images/img_video.jpg" />
+			</div>
+			<div class="col-md-8">
+				<h3>Lorem Ipsum</h3>
+				<p>
+					At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
+
+	It is a long established fact that a reader will be distracted by the readable content 
+
+	There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some
+				</p>
+
+			</div>
+		</div>
+		
+    </div>
+	</div>
+	
+	<script type="text/javascript">	
+	 $(document).ready(function () {
+	 	// Activate carousel
+    	$("#myCarousel").carousel();
+
+    	// Enable carousel control
+    	$(".left").click(function () {	
+        	$("#myCarousel").carousel('prev');
+    	});
+    	$(".right").click(function () {
+        	$("#myCarousel").carousel('next');
+    	});
+		
+		/*if($('#landingPageWrapper').length > 0){
+			$('.navToggle').hide();
+		}*/
+
+    	/*$("#searchAdvisorCarousel").carousel();
+    	$("#searchAdvisorLeft").click(function () {	
+        	$("#searchAdvisorCarousel").carousel('prev');
+    	});
+    	$("#searchAdvisorRight").click(function () {
+        	$("#searchAdvisorCarousel").carousel('next');
+    	});*/
+
+    	
+
+	});
+	</script>

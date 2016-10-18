@@ -1,0 +1,46 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name afwebappApp.controller:MainCtrl
+ * @description
+ * # MainCtrl
+ * Controller of the afwebappApp
+ */
+angular.module('afwebappApp')
+  .controller('MainCtrl', function ($scope,$http,$rootScope,$location,CommonUrlFactory,FolioFactory,AdvisoryFactory) {
+	
+		var urlBase = CommonUrlFactory.getUserServiceUrl();
+		$scope.obj = new FolioFactory();
+		$scope.pageNumber=0;
+		
+		$rootScope.currentPath = $location.path();
+		$rootScope.hideMenu=true;
+		
+	
+		$scope.getTopFoliosForHomePage=function(pageNumber){
+			$scope.obj.getTopFoliosForHomePage(pageNumber).success(function(data){
+				$scope.pageNumber=pageNumber;
+				$scope.searchResultFolios=data;
+				$scope.totalPages=$scope.searchResultFolios[0].totalPages;
+				console.log($scope.searchResultFolios);
+			}).error(function(error){
+				console.log(error);
+			});	
+		};
+		
+		$scope.getTopFoliosForHomePage(0);			
+			
+			var advisory={showInHomePage:true};
+			AdvisoryFactory.searchAdvisory(advisory).success(function (data) {
+				$scope.searchResultAdvisors=data;
+				console.log(data.length);
+				console.log(data);
+			});
+		
+		
+		
+		
+		
+		
+  });

@@ -1,0 +1,83 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name afwebappApp.controller:MainCtrl
+ * @description
+ * # MainCtrl
+ * Controller of the afwebappApp
+ */
+angular.module('afwebappApp')
+  .controller('MainCtrl', function ($scope,$http,$rootScope,$location,CommonUrlFactory,FolioFactory,AdvisoryFactory) {
+	
+		var urlBase = CommonUrlFactory.getUserServiceUrl();
+		$scope.obj = new FolioFactory();
+		$scope.pageNumber=0;
+		
+		$rootScope.currentPath = $location.path();
+		$rootScope.hideMenu=true;
+		
+	
+		$scope.getTopFoliosForHomePage=function(pageNumber){
+			$scope.obj.getTopFoliosForHomePage(pageNumber).success(function(data){
+				$scope.pageNumber=pageNumber;
+				$scope.searchResultFolios = data;
+				console.log($scope.searchResultFolios[0]);//raja
+				$scope.totalPages=$scope.searchResultFolios[0].totalPages;
+				console.log($scope.searchResultFolios);
+			}).error(function(error){
+				console.log(error);
+			});	
+		};
+		
+		$scope.getTopFoliosForHomePage(0);			
+			
+			var advisory={showInHomePage:true};
+			AdvisoryFactory.searchAdvisory(advisory).success(function (data) {
+				$scope.searchResultAdvisors=data;
+				console.log(data.length);
+				console.log(data);
+			});
+		
+		
+		/* created by Raja for Why Us Blog */
+		
+			$scope.ShowWhyUsDialog = function (whyusstr) {
+			    console.log('ShowWhyUsDialog');
+			    var WhyusStr = '';
+			    var title = '';
+			    switch (whyusstr) {
+			        case '1':
+			            WhyusStr = '<p>&nbsp &nbsp Folio is basically a part of your entire portfolio, which can contain up to 10 stocks. Through Folio you can track your holdings more closely. By creating folios with us, you can compete with your own investment targets and compare your success ratio with others. Your weekly ranking may fetch you lucrative prizes as well.<p>';
+			            title = 'Track your investments through folios';
+			            break;
+			        case '2':
+			            WhyusStr = '<p>&nbsp &nbsp We bring you the top analyst recommendations at one place. With this unique feature you can view recommendations based on a particular stock, Analyst name or for a given time period.<p>';
+			            title = 'View top analyst recommendations at one place';
+			            break;
+			        case '3':
+			            WhyusStr = '<p>&nbsp &nbsp We track all folios created through us and rank them based on their performances. You have an option to follow other successful folios and view the holdings inside them (as long as the creator is OK with it). Through this you can expand your investment ideas by analyzing strategies of other successful investors.<p>';
+			            title = 'Option to follow top earning folios';
+			            break;
+			        case '4':
+			            WhyusStr = "<p>&nbsp &nbsp If you like someone to take care of your investments and give you maximum return with very minimal or no commission. Then we may have somebody just for your need nearby you. Search for a certified SEBI registered investment advisor near you and click on \"Contact me\". You will be contacted by the advisor for free, you have no obligation to connect with them if you don't like their ideas.<p>";
+			            title = 'Search for a financial adviser near you';
+			            break;
+			        case '5':
+			            WhyusStr = '<p>&nbsp &nbsp Using our blog and messaging feature you can directly communicate with successful investors with high ranked folios or high number of followers.<p>';
+			            title = 'Communicate with successful investors';
+			            break;
+			        default:
+
+			    }
+			    $scope.ShowDialog(title, WhyusStr);
+			};
+
+			$scope.ShowDialog = function (Title,str) {
+			    BootstrapDialog.show({
+			        title: Title,
+			        message: str
+			    });
+			};
+		
+  });
